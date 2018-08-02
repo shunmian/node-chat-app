@@ -13,6 +13,15 @@ app.use(express.static(viewRootPath))
 
 io.on('connection', (socket) => {
   console.log('Now user connected')
+  socket.emit('newMessage', {
+    from: 'andrew@example.com',
+    text: 'hey'
+  })
+
+  socket.on('createMessage', (message)=>{
+    console.log('createMessage', message)
+  })
+
   socket.on('disconnect', () => {
     console.log('Now user disconnected')
   })
